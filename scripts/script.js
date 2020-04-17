@@ -8,7 +8,7 @@ let todoControl = document.querySelector('.todo-control'),
     textTodo = document.querySelector('.text-todo');
 
 let todoData = [];
-console.log(todoData);
+
 
 
 let render = function(){
@@ -23,7 +23,7 @@ let render = function(){
 
 
     obj.forEach(function(item, i){
-        localStorage.getItem('elem', JSON.stringify(item));
+        localStorage.setItem('elem', JSON.stringify(item));
         //let obj = localStorage.getItem('elem', JSON.stringify(item));
         let el = JSON.parse(localStorage.elem);
 
