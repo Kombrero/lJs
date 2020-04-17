@@ -59,6 +59,7 @@ let render = function(){
                 todoList.append(li);
             }
             return el.completed;
+
             //render();
         })
 
@@ -99,12 +100,10 @@ todoControl.addEventListener('submit', function(event){
         
         console.log(todoData);
        
-
+        headerInput.value = '';
         localStorage.setItem('todosData', JSON.stringify(todoData));
         localStorage.getItem('todosData', JSON.stringify(todoData));
-
-        headerInput.value = '';
-        
+        //console.log(todosData);
 
         render();
     }
