@@ -16,14 +16,14 @@ let render = function(){
     todoList.textContent = '';
     todoCompleted.textContent = '';
 
-    // localStorage.setItem('todosData', JSON.stringify(todoData));
+    localStorage.setItem('todosData', JSON.stringify(todoData));
     
     let obj = JSON.parse(localStorage.todosData);
     console.log(obj);
 
 
     obj.forEach(function(item, i){
-        localStorage.getItem('elem', JSON.stringify(item));
+        localStorage.setItem('elem', JSON.stringify(item));
         //let obj = localStorage.getItem('elem', JSON.stringify(item));
         let el = JSON.parse(localStorage.elem);
 
@@ -55,8 +55,16 @@ let render = function(){
 
             if(el.completed === true) {
                 todoCompleted.append(li);
+                todoData.splice(el, 1)
+                todoData.push(el);
+                localStorage.setItem('todosDataComplete', JSON.stringify(todoData));
+                localStorage.removeItem('todosData', JSON.stringify(todoData));
             }else{
                 todoList.append(li);
+                todoData.splice(el, 1)
+                todoData.push(el);
+                localStorage.removeItem('todosDataComplete', JSON.stringify(todoData));
+                localStorage.setItem('todosData', JSON.stringify(todoData));
             }
             return el.completed;
             //render();
@@ -85,30 +93,31 @@ let render = function(){
 todoControl.addEventListener('submit', function(event){
     
     if(headerInput.value.trim() === ''){
-        return;
+       event.preventDefault();
     }else{
+        console.log(todoData);
         event.preventDefault();
-    
-        const newTodo = {
-            values: headerInput.value,
-            completed: false
-        };
+            const newTodo = {
+                values: headerInput.value,
+                completed: false
+                
+        }
+
+        console.log(todoData);
         todoData.push(newTodo);
         localStorage.setItem('todosData', JSON.stringify(todoData));
-    
+        localStorage.getItem('todosData', JSON.stringify(todoData));
+        
+        };
         
         console.log(todoData);
-       
-
-        localStorage.setItem('todosData', JSON.stringify(todoData));
-        localStorage.getItem('todosData', JSON.stringify(todoData));
 
         headerInput.value = '';
         
 
         render();
-    }
+    })
    
-})
+
 
 render();
