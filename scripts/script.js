@@ -128,6 +128,6 @@ todoControl.addEventListener('submit', function(event){
         render();
     })
    
-
-
+console.log(1);
+//
 render();
