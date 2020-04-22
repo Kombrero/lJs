@@ -8,7 +8,7 @@ let todoControl = document.querySelector('.todo-control'),
     textTodo = document.querySelector('.text-todo');
 
 let todoData = [];
-console.log(todoData);
+
 
 
 let render = function(){
