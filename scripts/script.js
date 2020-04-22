@@ -8,6 +8,7 @@ let todoControl = document.querySelector('.todo-control'),
     textTodo = document.querySelector('.text-todo');
 
 let todoData = [];
+console.log(todoData);
 
 
 
@@ -25,50 +26,59 @@ let render = function(){
     obj.forEach(function(item, i){
         localStorage.setItem('elem', JSON.stringify(item));
         //let obj = localStorage.getItem('elem', JSON.stringify(item));
-        let el = JSON.parse(localStorage.elem);
+        let els = JSON.parse(localStorage.elem);
 
         const li = document.createElement('li');
         li.classList.add('todo-item');
 
-        li.innerHTML = '<span class="text-todo">' + el.values + '</span>' + 
+        li.innerHTML = '<span class="text-todo">' + els.values + '</span>' + 
         '<div class="todo-buttons">' +
             '<button class="todo-remove"></button>' +
             '<button class="todo-complete"></button>' +
         '</div>' ; 
-        console.log(el);
         i = obj.indexOf(item);
         
         //console.log(i);
             
-        if(el.completed) {
+        if(item.completed) {
             todoCompleted.append(li);
         }else{
             todoList.append(li);
         }
+
+
+        const tFalse = function() {
+            obj.forEach((el)=>{
+                if(el.completed){
+                   todoCompleted.append(li);
+                    todoData.splice(el, 1);
+                    todoData.push(el);
+                    localStorage.setItem('todosData', todoData);
+                    render(); 
+                }else{
+                    console.log(item.completed);
+                    todoList.append(li);
+                    todoData.splice(el, 1);
+                    todoData.push(el);
+                    console.log(el);
+                    localStorage.setItem('todosData', todoData);
+                   
+                    render();
+                }
+            })
+        };
        
         const todoComplete = li.querySelector('.todo-complete');
 
         todoComplete.addEventListener('click', function(){
-            console.log(el.completed);
-            el.completed = !el.completed;
-            console.log(el);
-
-            if(el.completed === true) {
-                todoCompleted.append(li);
-                todoData.splice(el, 1)
-                todoData.push(el);
-                localStorage.setItem('todosDataComplete', JSON.stringify(todoData));
-                localStorage.removeItem('todosData', JSON.stringify(todoData));
-            }else{
-                todoList.append(li);
-                todoData.splice(el, 1)
-                todoData.push(el);
-                localStorage.removeItem('todosDataComplete', JSON.stringify(todoData));
-                localStorage.setItem('todosData', JSON.stringify(todoData));
+            console.log(item.completed);
+            item.completed = !item.completed;
+            console.log(item);
+            tFalse();
+            render();
             }
-            return el.completed;
-            //render();
-        })
+            
+        )
 
         
 
