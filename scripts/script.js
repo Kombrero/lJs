@@ -49,21 +49,25 @@ let render = function(){
 
 
         const tFalse = function() {
+
             if(item.completed){
-                 todoData.splice(item, 1);
-                 todoData.push(item);
-                 console.log(todoData);
-                 render(); 
-             }else{
-                
-                 todoData.splice(item, 1);
-                 todoData.push(item);
-                 
-                 console.log(todoData);
-                
-                 render();
-             }
-          };  
+                todoData.splice(i, 1);
+                todoData.push(item);
+                localStorage.setItem('todosData', JSON.stringify(todoData));
+                console.log(todoData);
+                render(); 
+            }else{
+               
+                todoData.splice(i, 1);
+                todoData.push(item);
+                localStorage.setItem('todosData', JSON.stringify(todoData));
+                console.log(todoData);
+               
+                render();
+            }
+          
+        }; 
+            
                
             
         
