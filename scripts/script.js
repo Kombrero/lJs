@@ -8,9 +8,6 @@ let todoControl = document.querySelector('.todo-control'),
     textTodo = document.querySelector('.text-todo');
 
 let todoData = [];
-console.log(todoData);
-
-
 
 let render = function(){
 
@@ -20,9 +17,7 @@ let render = function(){
     localStorage.setItem('todosData', JSON.stringify(todoData));
     
     let obj = JSON.parse(localStorage.todosData);
-    console.log(obj);
-
-
+    
     obj.forEach(function(item, i){
         localStorage.setItem('elem', JSON.stringify(item));
         //let obj = localStorage.getItem('elem', JSON.stringify(item));
@@ -45,7 +40,6 @@ let render = function(){
         }else{
             todoList.append(li);
         }
-
 
         const tFalse = function() {
             obj.forEach((el)=>{
@@ -80,8 +74,6 @@ let render = function(){
             
         )
 
-        
-
         const todoRemove = li.querySelector('.todo-remove');
 
         todoRemove.addEventListener('click', function(){
@@ -91,43 +83,34 @@ let render = function(){
             console.log(obj); 
             li.remove(li); 
             render(); 
-        })
+        })     
+    });  
 
+    todoControl.addEventListener('submit', function(event){
         
-          
-    });
-
-    
-};
-
-todoControl.addEventListener('submit', function(event){
-    
-    if(headerInput.value.trim() === ''){
-       event.preventDefault();
-    }else{
-        console.log(todoData);
+        if(headerInput.value.trim() === ''){
         event.preventDefault();
-            const newTodo = {
-                values: headerInput.value,
-                completed: false
-                
+        }else{
+            console.log(todoData);
+            event.preventDefault();
+                const newTodo = {
+                    values: headerInput.value,
+                    completed: false                
         }
 
         console.log(todoData);
         todoData.push(newTodo);
         localStorage.setItem('todosData', JSON.stringify(todoData));
         localStorage.getItem('todosData', JSON.stringify(todoData));
-        
         };
-        
-        console.log(todoData);
 
         headerInput.value = '';
         
-
         render();
-    })
-   
-console.log(1);
-//
+       
+    });
+
+};
+
+
 render();
