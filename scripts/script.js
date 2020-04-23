@@ -20,13 +20,13 @@ let render = function(){
     
     obj.forEach(function(item, i){
         localStorage.setItem('elem', JSON.stringify(item));
-        //let obj = localStorage.getItem('elem', JSON.stringify(item));
-        let els = JSON.parse(localStorage.elem);
+       
+        //let els = JSON.parse(localStorage.elem);
 
         const li = document.createElement('li');
         li.classList.add('todo-item');
 
-        li.innerHTML = '<span class="text-todo">' + els.values + '</span>' + 
+        li.innerHTML = '<span class="text-todo">' + item.values + '</span>' + 
         '<div class="todo-buttons">' +
             '<button class="todo-remove"></button>' +
             '<button class="todo-complete"></button>' +
